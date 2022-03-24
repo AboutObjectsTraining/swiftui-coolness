@@ -5,16 +5,16 @@ import SwiftUI
 import Combine
 
 class CellStore: ObservableObject {
-    @Published var cellModels: [CellModel]
+    @Published var cells: [Cell]
     
-    init(cellModels: [CellModel] = []) {
-        self.cellModels = cellModels
+    init(cells: [Cell] = []) {
+        self.cells = cells
     }
 }
 
 #if DEBUG
 let testData = [
-    CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: CGSize(width: 20, height: 0)),
-    CellModel(text: "Groovy View Cells Rock! 🎉🍾", color: Color.orange, offset: CGSize(width: 60, height: 0)),
+    Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: CGSize(width: 20, height: 0)),
+    Cell(text: "Groovy View Cells Rock! 🎉🍾", color: Color.orange, offset: CGSize(width: 60, height: 0)),
 ]
 #endif

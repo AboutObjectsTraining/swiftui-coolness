@@ -6,7 +6,7 @@ import SwiftUI
 struct CoolView: View {
     @State private var text = ""
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @ObservedObject var store = CellStore(cellModels: testData)
+    @ObservedObject var store = CellStore(cells: testData)
     
     var backgroundColor: Color {
         colorScheme == .light ? Color.orange : Color.brown
@@ -20,7 +20,7 @@ struct CoolView: View {
             
             VStack(spacing: 0) {
                 AccessoryView(text: $text, addCell: addCell)
-                CellContainer(cellModels: store.cellModels)
+                CellContainer(cells: store.cells)
             }
             .accentColor(Color.orange)
             .edgesIgnoringSafeArea(.all)
@@ -29,14 +29,14 @@ struct CoolView: View {
     
     func addCell() {
         print("In \(#function), text is \(text)")
-        let newModel = CellModel(text: text, color: .blue, offset: .zero)
-        store.cellModels.append(newModel)
+        let newModel = Cell(text: text, color: .blue, offset: .zero)
+        store.cells.append(newModel)
     }
 }
 
 struct CellContainer: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    let cellModels: [CellModel]
+    let cells: [Cell]
     
     var background: some View {
         Rectangle()
@@ -47,21 +47,21 @@ struct CellContainer: View {
     var body: some View {
         ZStack {
             background
-            Cells(cellModels: cellModels)
+            Cells(cells: cells)
         }
         .clipped()
     }
 }
 
 struct Cells: View {
-    let cellModels: [CellModel]
+    let cells: [Cell]
     let topPadding: CGFloat = 40
 
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 30) {
-                ForEach(self.cellModels) {
-                    CoolViewCell(cellModel: $0)
+                ForEach(self.cells) {
+                    CoolViewCell(cell: $0)
                 }
             }
             .frame(width: geometry.size.width,

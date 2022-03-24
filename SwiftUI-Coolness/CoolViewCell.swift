@@ -13,7 +13,7 @@ struct CoolViewCell: View {
     @State private var currentOffset = CGSize.zero
     @State private var bouncing = false
     
-    let cellModel: CellModel
+    let cell: Cell
     let animation = Animation
         .easeInOut(duration: 1)
         .repeatCount(7, autoreverses: true)
@@ -35,16 +35,16 @@ struct CoolViewCell: View {
     }
     
     var body: some View {
-        Text(cellModel.text)
+        Text(cell.text)
             .font(.headline)
             .fontWeight(.bold)
             .foregroundColor(textColor)
             .padding(.vertical, 9.0)
             .padding(.horizontal, 14.0)
-            .background(cellModel.color)
+            .background(cell.color)
             .cornerRadius(10)
             .overlay(border)
-            .offset(offsetAmount + currentOffset + cellModel.offset)
+            .offset(offsetAmount + currentOffset + cell.offset)
             .gesture(drag)
             .rotationEffect(.degrees(bouncing ? 90 : 0), anchor: .center)
             .modifier(bouncing ? BounceEffect(size: 120) : BounceEffect(size: 0))
@@ -87,12 +87,12 @@ struct BounceEffect: GeometryEffect {
 
 struct GroovyViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        CoolViewCell(cellModel: CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
+        CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
             .previewLayout(.sizeThatFits)
-        CoolViewCell(cellModel: CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
+        CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
             .environment(\.sizeCategory, .extraExtraExtraLarge)
             .previewLayout(.sizeThatFits)
-        CoolViewCell(cellModel: CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
+        CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
             .previewLayout(.sizeThatFits)
             .preferredColorScheme(.dark)
     }
