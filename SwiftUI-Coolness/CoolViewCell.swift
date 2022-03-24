@@ -10,6 +10,7 @@ extension Color {
 struct CoolViewCell: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @GestureState private var offsetAmount =  CGSize.zero
+    @State private var isHighlighted = false
     @State private var currentOffset = CGSize.zero
     @State private var bouncing = false
     
@@ -29,9 +30,21 @@ struct CoolViewCell: View {
     }
     
     var drag: some Gesture {
-        DragGesture()
-            .updating($offsetAmount) { value, state, _ in state = value.translation }
+        DragGesture(minimumDistance: 0)
+            .updating($offsetAmount) { value, state, _ in
+                state = value.translation
+            }
+            .onChanged { _ in
+                isHighlighted = true
+            }
             .onEnded(updateOffset)
+    }
+    
+    var tap: some Gesture {
+        TapGesture()
+            .onEnded {
+                isHighlighted = false
+            }
     }
     
     var body: some View {
@@ -41,7 +54,7 @@ struct CoolViewCell: View {
             .foregroundColor(textColor)
             .padding(.vertical, 9.0)
             .padding(.horizontal, 14.0)
-            .background(cell.color)
+            .background(cell.color.opacity(isHighlighted ? 0.5 : 1.0))
             .cornerRadius(10)
             .overlay(border)
             .offset(offsetAmount + currentOffset + cell.offset)
@@ -55,6 +68,7 @@ struct CoolViewCell: View {
         DispatchQueue.main.async {
             self.currentOffset = self.currentOffset + gesture.translation
         }
+        isHighlighted = false
     }
     
     private func bounceAnimation() {

@@ -11,7 +11,6 @@
 		B49AB2A927ED0E3200BE2701 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49AB2A827ED0E3200BE2701 /* App.swift */; };
 		B49AB2AB27ED0F4E00BE2701 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49AB2AA27ED0F4E00BE2701 /* Cell.swift */; };
 		B49AB2B327ED22AD00BE2701 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49AB2B227ED22AD00BE2701 /* CodableTests.swift */; };
-		B49AB2BA27ED2B1800BE2701 /* Cells.json in Sources */ = {isa = PBXBuildFile; fileRef = B49AB2B927ED2B1800BE2701 /* Cells.json */; };
 		B4A2EE45238C1FD0005B60FF /* CoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2EE44238C1FD0005B60FF /* CoolView.swift */; };
 		B4A2EE49238EFA09005B60FF /* CoolViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2EE48238EFA09005B60FF /* CoolViewCell.swift */; };
 		B4A2EE4B23915C08005B60FF /* CellStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2EE4A23915C08005B60FF /* CellStore.swift */; };
@@ -227,7 +226,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4A2EE49238EFA09005B60FF /* CoolViewCell.swift in Sources */,
-				B49AB2BA27ED2B1800BE2701 /* Cells.json in Sources */,
 				B40A24FB2391C31300DF8771 /* AccessoryView.swift in Sources */,
 				B4A2EE4B23915C08005B60FF /* CellStore.swift in Sources */,
 				B4A2EE45238C1FD0005B60FF /* CoolView.swift in Sources */,
