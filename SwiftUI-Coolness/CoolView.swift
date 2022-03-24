@@ -77,7 +77,7 @@ func +(lhs: CGSize, rhs: CGSize) -> CGSize {
 }
 
 // MARK: Previews
-struct GroovyViewPreviews: PreviewProvider {
+struct CoolViewPreviews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
             CoolView()

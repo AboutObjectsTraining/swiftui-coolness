@@ -85,7 +85,7 @@ struct BounceEffect: GeometryEffect {
     }
 }
 
-struct GroovyViewCell_Previews: PreviewProvider {
+struct CoolViewCell_Previews: PreviewProvider {
     static var previews: some View {
         CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
             .previewLayout(.sizeThatFits)

@@ -15,6 +15,6 @@ class CellStore: ObservableObject {
 #if DEBUG
 let testData = [
     Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: CGSize(width: 20, height: 0)),
-    Cell(text: "Groovy View Cells Rock! 🎉🍾", color: Color.orange, offset: CGSize(width: 60, height: 0)),
+    Cell(text: "Cool View Cells Rock! 🎉🍾", color: Color.orange, offset: CGSize(width: 60, height: 0)),
 ]
 #endif
