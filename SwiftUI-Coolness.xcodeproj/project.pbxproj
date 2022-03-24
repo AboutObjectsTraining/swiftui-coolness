@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		B40A24FB2391C31300DF8771 /* AccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A24FA2391C31300DF8771 /* AccessoryView.swift */; };
+		B49AB2A927ED0E3200BE2701 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49AB2A827ED0E3200BE2701 /* App.swift */; };
 		B4A2EE45238C1FD0005B60FF /* CoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2EE44238C1FD0005B60FF /* CoolView.swift */; };
 		B4A2EE49238EFA09005B60FF /* CoolViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2EE48238EFA09005B60FF /* CoolViewCell.swift */; };
 		B4A2EE4B23915C08005B60FF /* CellStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2EE4A23915C08005B60FF /* CellStore.swift */; };
-		B4CF2E2123899AA6000322E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CF2E2023899AA6000322E6 /* AppDelegate.swift */; };
-		B4CF2E2323899AA6000322E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CF2E2223899AA6000322E6 /* SceneDelegate.swift */; };
 		B4CF2E2723899AA9000322E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4CF2E2623899AA9000322E6 /* Assets.xcassets */; };
 		B4CF2E2A23899AA9000322E6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4CF2E2923899AA9000322E6 /* Preview Assets.xcassets */; };
 		B4CF2E2D23899AA9000322E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4CF2E2B23899AA9000322E6 /* LaunchScreen.storyboard */; };
@@ -20,12 +19,11 @@
 
 /* Begin PBXFileReference section */
 		B40A24FA2391C31300DF8771 /* AccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryView.swift; sourceTree = "<group>"; };
+		B49AB2A827ED0E3200BE2701 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		B4A2EE44238C1FD0005B60FF /* CoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoolView.swift; sourceTree = "<group>"; };
 		B4A2EE48238EFA09005B60FF /* CoolViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoolViewCell.swift; sourceTree = "<group>"; };
 		B4A2EE4A23915C08005B60FF /* CellStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStore.swift; sourceTree = "<group>"; };
 		B4CF2E1D23899AA6000322E6 /* SwiftUI-Coolness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Coolness.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B4CF2E2023899AA6000322E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B4CF2E2223899AA6000322E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B4CF2E2623899AA9000322E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4CF2E2923899AA9000322E6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B4CF2E2C23899AA9000322E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,8 +60,7 @@
 		B4CF2E1F23899AA6000322E6 /* SwiftUI-Coolness */ = {
 			isa = PBXGroup;
 			children = (
-				B4CF2E2023899AA6000322E6 /* AppDelegate.swift */,
-				B4CF2E2223899AA6000322E6 /* SceneDelegate.swift */,
+				B49AB2A827ED0E3200BE2701 /* App.swift */,
 				B4A2EE44238C1FD0005B60FF /* CoolView.swift */,
 				B4A2EE48238EFA09005B60FF /* CoolViewCell.swift */,
 				B40A24FA2391C31300DF8771 /* AccessoryView.swift */,
@@ -159,8 +156,7 @@
 				B40A24FB2391C31300DF8771 /* AccessoryView.swift in Sources */,
 				B4A2EE4B23915C08005B60FF /* CellStore.swift in Sources */,
 				B4A2EE45238C1FD0005B60FF /* CoolView.swift in Sources */,
-				B4CF2E2123899AA6000322E6 /* AppDelegate.swift in Sources */,
-				B4CF2E2323899AA6000322E6 /* SceneDelegate.swift in Sources */,
+				B49AB2A927ED0E3200BE2701 /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
