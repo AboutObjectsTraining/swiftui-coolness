@@ -1,0 +1,20 @@
+[
+    {
+        "color" : "purple",
+        "id" : "7C9E34A7-270E-4326-B7FA-B0169619B5B4",
+        "offset" : {
+            "Height" : 0,
+            "Width" : 20
+        },
+        "text" : "Hello World! 🌍🌎🌏"
+    },
+    {
+        "color" : "orange",
+        "id" : "0866704F-9942-42FF-A2EC-4C7942BC7957",
+        "offset" : {
+            "Height" : 0,
+            "Width" : 60
+        },
+        "text" : "Cool View Cells Rock! 🎉🍾"
+    }
+]
