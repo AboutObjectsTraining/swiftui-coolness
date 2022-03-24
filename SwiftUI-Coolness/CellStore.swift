@@ -12,13 +12,6 @@ class CellStore: ObservableObject {
     }
 }
 
-struct CellModel: Identifiable {
-    var id = UUID()
-    var text: String
-    var color: Color
-    var offset: CGSize
-}
-
 #if DEBUG
 let testData = [
     CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: CGSize(width: 20, height: 0)),
