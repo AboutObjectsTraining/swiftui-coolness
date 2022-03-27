@@ -30,23 +30,12 @@ struct CoolViewCell: View {
     }
     
     var drag: some Gesture {
-        DragGesture(minimumDistance: 0)
-            .updating($offsetAmount) { value, state, _ in
-                state = value.translation
-            }
-            .onChanged { _ in
-                isHighlighted = true
-            }
+        DragGesture()
+            .updating($offsetAmount) { value, state, _ in state = value.translation }
+            .onChanged { _ in isHighlighted = true }
             .onEnded(updateOffset)
     }
-    
-    var tap: some Gesture {
-        TapGesture()
-            .onEnded {
-                isHighlighted = false
-            }
-    }
-    
+        
     var body: some View {
         Text(cell.text)
             .font(.headline)
@@ -75,8 +64,9 @@ struct CoolViewCell: View {
         withAnimation(self.animation) {
             self.bouncing = true
         }
+        
         // Note: SwiftUI doesn't currently provide an animation completion callback.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.5) {
             withAnimation(self.reverseAnimation) {
                 self.bouncing = false
             }
