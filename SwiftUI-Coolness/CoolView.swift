@@ -34,48 +34,6 @@ struct CoolView: View {
     }
 }
 
-struct CellContainer: View {
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    let cells: [Cell]
-    
-    var background: some View {
-        Rectangle()
-            .fill(.regularMaterial)
-            .edgesIgnoringSafeArea(.all)
-    }
-    
-    var body: some View {
-        ZStack {
-            background
-            Cells(cells: cells)
-        }
-        .clipped()
-    }
-}
-
-struct Cells: View {
-    let cells: [Cell]
-    let topPadding: CGFloat = 40
-
-    var body: some View {
-        GeometryReader { geometry in
-            VStack(alignment: .leading, spacing: 30) {
-                ForEach(self.cells) {
-                    CoolViewCell(cell: $0)
-                }
-            }
-            .frame(width: geometry.size.width,
-                   height: geometry.size.height - topPadding,
-                   alignment: .topLeading)
-            .padding(.top, topPadding)
-        }
-    }
-}
-
-func +(lhs: CGSize, rhs: CGSize) -> CGSize {
-    return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
-}
-
 // MARK: Previews
 struct CoolViewPreviews: PreviewProvider {
     static var previews: some View {

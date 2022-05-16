@@ -3,44 +3,6 @@
 
 import SwiftUI
 
-struct CoolTextField: View {
-    @Binding var text: String
-    @FocusState private var isFocused: Bool
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
-    var isClearButtonVisible: Bool {
-        isFocused && !text.isEmpty
-    }
-    
-    var clearButtonImage: some View {
-        Image(systemName: "multiply.circle.fill")
-            .foregroundColor(.gray)
-            .opacity(1)
-            .imageScale(.large)
-            .padding(.horizontal, 6)
-            .background(colorScheme == .light ? .white : .black)
-    }
-    
-    var body: some View {
-        ZStack(alignment: .trailing) {
-            TextField("Enter text",
-                      text: self.$text,
-                      prompt: Text("Enter a label"))
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .focused($isFocused)
-            
-            if isClearButtonVisible {
-                Button(action: clear,
-                       label: { clearButtonImage })
-            }
-        }
-    }
-    
-    private func clear() {
-        text = ""
-    }
-}
-
 struct AccessoryView: View {
     struct Height {
         static let compact: CGFloat = 80

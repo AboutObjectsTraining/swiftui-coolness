@@ -7,6 +7,10 @@ extension Color {
     static let darkGray = Color(white: 0.2)
 }
 
+func +(lhs: CGSize, rhs: CGSize) -> CGSize {
+    return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+}
+
 struct CoolViewCell: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @GestureState private var offsetAmount =  CGSize.zero
@@ -57,11 +61,12 @@ struct CoolViewCell: View {
             .gesture(drag)
             .rotationEffect(.degrees(bouncing ? 90 : 0), anchor: .center)
             .modifier(bouncing ? BounceEffect(size: 120) : BounceEffect(size: 0))
-//            .modifier(bouncing
-//                      ? Bounce(rotation: .pi / 2, width: 120, height: 240)
-//                      : Bounce(rotation: 0, width: 0, height: 0))
-            .onTapGesture(count: 2, perform: bounceAnimation)
+            .onTapGesture(count: 2, perform: bounce)
     }
+}
+
+// MARK: Operations
+extension CoolViewCell {
     
     private func updateOffset(gesture: DragGesture.Value) {
         DispatchQueue.main.async {
@@ -70,7 +75,7 @@ struct CoolViewCell: View {
         isHighlighted = false
     }
     
-    private func bounceAnimation() {
+    private func bounce() {
         withAnimation(self.animation) {
             self.bouncing = true
         }
@@ -83,30 +88,6 @@ struct CoolViewCell: View {
                 self.bouncing = false
             }
         }
-    }
-}
-
-struct Bounce: GeometryEffect {
-    var rotation: CGFloat
-    var width: CGFloat
-    var height: CGFloat
-    
-    var animatableData: CGRect.AnimatableData {
-        get {
-            let point = CGPoint.AnimatableData(rotation, 0)
-            let size = CGSize.AnimatableData(width, height)
-            return CGRect.AnimatableData(point, size)
-        }
-        set {
-            rotation = newValue.first.first
-            width = newValue.second.first
-            height = newValue.second.second
-        }
-    }
-    
-    func effectValue(size: CGSize) -> ProjectionTransform {
-        let translation = CGAffineTransform(translationX: width, y: height)
-        return ProjectionTransform(translation.rotated(by: rotation))
     }
 }
 
