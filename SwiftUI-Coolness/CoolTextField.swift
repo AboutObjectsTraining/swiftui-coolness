@@ -8,11 +8,11 @@ struct CoolTextField: View {
     @FocusState private var isFocused: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
-    var isClearButtonVisible: Bool {
+    private var isClearButtonVisible: Bool {
         isFocused && !text.isEmpty
     }
     
-    var clearButtonImage: some View {
+    private func clearButtonImage() -> some View {
         Image(systemName: "multiply.circle.fill")
             .foregroundColor(.gray)
             .opacity(1)
@@ -30,12 +30,14 @@ struct CoolTextField: View {
             .focused($isFocused)
             
             if isClearButtonVisible {
-                Button(action: clear,
-                       label: { clearButtonImage })
+                Button(action: clear, label: clearButtonImage)
             }
         }
     }
-    
+}
+
+// MARK: - Intents
+extension CoolTextField {
     private func clear() {
         text = ""
     }
@@ -50,7 +52,7 @@ struct CoolTextField_Previews: PreviewProvider {
                 .padding()
         }
         .frame(height: 100)
-        .background(.brown)
+        .background(.brown.opacity(0.3))
     }
     
     static var previews: some View {

@@ -107,15 +107,17 @@ struct BounceEffect: GeometryEffect {
     }
 }
 
+#if DEBUG
 struct CoolViewCell_Previews: PreviewProvider {
     static var previews: some View {
+        Group {
         CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
-            .previewLayout(.sizeThatFits)
         CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
             .environment(\.sizeCategory, .extraExtraExtraLarge)
-            .previewLayout(.sizeThatFits)
         CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
-            .previewLayout(.sizeThatFits)
             .preferredColorScheme(.dark)
+        }
+        .previewLayout(.sizeThatFits)
     }
 }
+#endif

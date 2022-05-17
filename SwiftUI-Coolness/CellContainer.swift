@@ -41,6 +41,7 @@ struct Cells: View {
     }
 }
 
+#if DEBUG
 struct CellContainer_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
@@ -49,3 +50,4 @@ struct CellContainer_Previews: PreviewProvider {
         }
     }
 }
+#endif

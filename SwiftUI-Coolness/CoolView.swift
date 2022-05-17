@@ -14,8 +14,7 @@ struct CoolView: View {
 
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(backgroundColor)
+            backgroundColor
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
@@ -35,6 +34,7 @@ struct CoolView: View {
 }
 
 // MARK: Previews
+#if DEBUG
 struct CoolViewPreviews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
@@ -43,3 +43,4 @@ struct CoolViewPreviews: PreviewProvider {
         }
     }
 }
+#endif

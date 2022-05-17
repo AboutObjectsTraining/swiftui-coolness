@@ -33,6 +33,7 @@ struct AccessoryView: View {
                         .font(.system(size: 22))
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
+                        .foregroundColor(.orange)
                 }
             }
             .frame(height: height - 40, alignment: .bottom)
@@ -41,17 +42,23 @@ struct AccessoryView: View {
     }
 }
 
+#if DEBUG
 struct AccessoryView_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            Color.orange
-            AccessoryView(text: .constant("Hello, Hello, Hello! I am your beloved Count Olaf."), addCell: {} )
+        Group {
+            ZStack {
+                Color.orange
+                AccessoryView(text: .constant("Hello, Hello, Hello! I am your beloved Count Olaf."), addCell: {} )
+            }
+            
+            ZStack {
+                Color.brown
+                AccessoryView(text: .constant("Hello, Hello, Hello! I am your beloved Count Olaf."), addCell: {} )
+            }
+            .preferredColorScheme(.dark)
         }
-        
-        ZStack {
-            Color.brown
-            AccessoryView(text: .constant("Hello, Hello, Hello! I am your beloved Count Olaf."), addCell: {} )
-        }
-        .preferredColorScheme(.dark)
+        .frame(height: 80)
+        .previewLayout(.sizeThatFits)
     }
 }
+#endif
