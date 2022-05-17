@@ -5,10 +5,13 @@ import SwiftUI
 
 @main
 struct CoolnessApp: App {
+    // TODO: Remove `testData` shim when model is fully fleshed out.
+    @StateObject var coolViewModel = CoolViewModel(cells: testData)
     
     var body: some Scene {
         WindowGroup {
             CoolView()
+                .environmentObject(coolViewModel)
         }
     }
 }

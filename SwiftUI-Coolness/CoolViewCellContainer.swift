@@ -31,13 +31,12 @@ struct CoolViewCells: View {
             let width = geometry.size.width
             let height = geometry.size.height - topPadding
             
-            VStack(alignment: .leading, spacing: 30) {
+            ZStack(alignment: .leading) {
                 ForEach(cells) {
                     CoolViewCell(cellModel: $0)
                 }
             }
             .frame(width: width, height: height, alignment: .topLeading)
-            .padding(.top, topPadding)
         }
     }
 }

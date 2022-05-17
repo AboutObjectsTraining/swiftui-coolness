@@ -62,7 +62,7 @@ struct AccessoryView_Previews: PreviewProvider {
         .frame(height: 80)
         .previewLayout(.sizeThatFits)
         
-        CoolView()
+        CoolView.testView
     }
 }
 #endif

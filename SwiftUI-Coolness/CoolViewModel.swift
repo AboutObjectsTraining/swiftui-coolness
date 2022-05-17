@@ -12,9 +12,24 @@ final class CoolViewModel: ObservableObject {
     }
 }
 
+// MARK: - Intents
+extension CoolViewModel {
+    func bringCellToFront(_ cell: CellModel) {
+        guard let index = cells.firstIndex(where: { $0.id == cell.id }) else { return }
+        cells.remove(at: index)
+        cells.append(cell)
+    }
+}
+
 #if DEBUG
+extension CoolViewModel {
+    class var testModel: CoolViewModel {
+        CoolViewModel(cells: testData)
+    }
+}
+
 let testData = [
-    CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: CGSize(width: 20, height: 0)),
-    CellModel(text: "Cool View Cells Rock! 🎉🍾", color: Color.orange, offset: CGSize(width: 60, height: 0)),
+    CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: CGSize(width: 20, height: 40)),
+    CellModel(text: "Cool View Cells Rock! 🎉🍾", color: Color.orange, offset: CGSize(width: 60, height: 100)),
 ]
 #endif

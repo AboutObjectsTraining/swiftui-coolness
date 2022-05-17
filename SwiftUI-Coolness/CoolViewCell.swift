@@ -15,6 +15,7 @@ func +(lhs: CGSize, rhs: CGSize) -> CGSize {
 struct CoolViewCell: View {
     let cellModel: CellModel
     
+    @EnvironmentObject var coolViewModel: CoolViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @GestureState private var offsetAmount =  CGSize.zero
@@ -40,7 +41,12 @@ struct CoolViewCell: View {
             .gesture(drag)
             .rotationEffect(.degrees(isBouncing ? 90 : 0), anchor: .center)
             .bounceEffect(isBouncing)
+            .onTapGesture(count: 1, perform: bringCellToFront)
             .onTapGesture(count: 2, perform: bounce)
+    }
+    
+    private func bringCellToFront() {
+        coolViewModel.bringCellToFront(cellModel)
     }
 }
 
@@ -146,7 +152,7 @@ struct CoolViewCell_Previews: PreviewProvider {
                 .environment(\.sizeCategory, .extraExtraExtraLarge)
             CoolViewCell(cellModel: CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
                 .preferredColorScheme(.dark)
-            CoolView()
+            CoolView.testView
         }
         .previewLayout(.sizeThatFits)
     }

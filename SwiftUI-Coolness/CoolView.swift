@@ -6,7 +6,7 @@ import SwiftUI
 struct CoolView: View {
     @State private var text = ""
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @ObservedObject var viewModel = CoolViewModel(cells: testData)
+    @EnvironmentObject var viewModel: CoolViewModel
     
     var backgroundColor: Color {
         colorScheme == .light ? Color.orange : Color.brown
@@ -35,10 +35,19 @@ struct CoolView: View {
 
 // MARK: Previews
 #if DEBUG
+extension CoolView {
+    static var testView: CoolView {
+        let coolView = CoolView()
+            .environmentObject(CoolViewModel.testModel)
+        
+        return coolView as! CoolView
+    }
+}
+
 struct CoolViewPreviews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
-            CoolView()
+            CoolView.testView
                 .environment(\.colorScheme, $0)
         }
     }
