@@ -8,34 +8,44 @@ extension Color {
 }
 
 func +(lhs: CGSize, rhs: CGSize) -> CGSize {
-    return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+    return CGSize(width: lhs.width + rhs.width,
+                  height: lhs.height + rhs.height)
 }
 
 struct CoolViewCell: View {
+    let cellModel: CellModel
+    
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     @GestureState private var offsetAmount =  CGSize.zero
-    @State private var isHighlighted = false
     @State private var currentOffset = CGSize.zero
-    @State private var bouncing = false
     
-    let cell: Cell
-    
-    static let duration = 1.0
-    static let repeatCount = 7
-    
-    let animation = Animation
-        .easeInOut(duration: duration)
-        .repeatCount(repeatCount, autoreverses: true)
-    let reverseAnimation = Animation.easeInOut(duration: duration)
+    @State private var isHighlighted = false
+    @State private var isBouncing = false
     
     var textColor: Color {
         colorScheme == .light ? Color.white : Color.darkGray
     }
     
-    var border: some View {
-        RoundedRectangle(cornerRadius: 10)
-            .stroke(textColor, lineWidth: 3)
+    var body: some View {
+        
+        let backgroundColor = cellModel.color
+            .opacity(isHighlighted ? 0.5 : 1.0)
+        
+        let offset = offsetAmount + currentOffset + cellModel.offset
+        
+        Text(cellModel.text)
+            .coolTextStyle(color: textColor, background: backgroundColor)
+            .offset(offset)
+            .gesture(drag)
+            .rotationEffect(.degrees(isBouncing ? 90 : 0), anchor: .center)
+            .bounceEffect(isBouncing)
+            .onTapGesture(count: 2, perform: bounce)
     }
+}
+
+// MARK: - Drag gesture
+extension CoolViewCell {
     
     var drag: some Gesture {
         DragGesture()
@@ -45,47 +55,68 @@ struct CoolViewCell: View {
             .onChanged { _ in isHighlighted = true }
             .onEnded(updateOffset)
     }
-        
-    var body: some View {
-        Text(cell.text)
-            .font(.headline)
-            .fontWeight(.bold)
-            .foregroundColor(textColor)
-            .padding(.vertical, 9.0)
-            .padding(.horizontal, 14.0)
-            .background(cell.color.opacity(isHighlighted ? 0.5 : 1.0))
-            .cornerRadius(10)
-            .overlay(border)
-            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
-            .offset(offsetAmount + currentOffset + cell.offset)
-            .gesture(drag)
-            .rotationEffect(.degrees(bouncing ? 90 : 0), anchor: .center)
-            .modifier(bouncing ? BounceEffect(size: 120) : BounceEffect(size: 0))
-            .onTapGesture(count: 2, perform: bounce)
-    }
-}
-
-// MARK: Operations
-extension CoolViewCell {
     
     private func updateOffset(gesture: DragGesture.Value) {
         DispatchQueue.main.async {
-            self.currentOffset = self.currentOffset + gesture.translation
+            currentOffset = currentOffset + gesture.translation
         }
         isHighlighted = false
     }
+}
+
+// MARK: - View modifiers
+extension Text {
     
+    func coolTextStyle(color: Color, background: Color) -> some View {
+        let border = RoundedRectangle(cornerRadius: 10)
+            .stroke(color, lineWidth: 3)
+        
+        return self
+            .font(.headline)
+            .padding(.vertical, 9.0)
+            .padding(.horizontal, 14.0)
+            .foregroundColor(color)
+            .background(background)
+            .cornerRadius(10)
+            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
+            .overlay(border)
+    }
+}
+
+extension View {
+    func bounceEffect(_ isBouncing: Bool) -> some View {
+        modifier(BounceEffect(size: isBouncing ? 120 : 0))
+    }
+}
+
+
+// MARK: - Animation
+extension CoolViewCell {
+    
+    private static let duration = 1.0
+    private static let repeatCount = 7
+    
+    private var animation: Animation {
+        Animation
+            .easeInOut(duration: Self.duration)
+            .repeatCount(Self.repeatCount, autoreverses: true)
+    }
+    
+    private var reverseAnimation: Animation {
+        Animation.easeInOut(duration: Self.duration)
+    }
+        
     private func bounce() {
         withAnimation(self.animation) {
-            self.bouncing = true
+            self.isBouncing = true
         }
         
         let delay = Double(Self.repeatCount) * Self.duration
         
         // Note: SwiftUI doesn't currently provide animation completion callbacks.
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            withAnimation(self.reverseAnimation) {
-                self.bouncing = false
+            withAnimation(reverseAnimation) {
+                isBouncing = false
             }
         }
     }
@@ -111,11 +142,11 @@ struct BounceEffect: GeometryEffect {
 struct CoolViewCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-        CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
-        CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
-            .environment(\.sizeCategory, .extraExtraExtraLarge)
-        CoolViewCell(cell: Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
-            .preferredColorScheme(.dark)
+            CoolViewCell(cellModel: CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
+                .environment(\.sizeCategory, .extraExtraExtraLarge)
+            CoolViewCell(cellModel: CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
+                .preferredColorScheme(.dark)
+            CoolView()
         }
         .previewLayout(.sizeThatFits)
     }

@@ -6,7 +6,7 @@ import SwiftUI
 struct CoolView: View {
     @State private var text = ""
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @ObservedObject var store = CellStore(cells: testData)
+    @ObservedObject var viewModel = CoolViewModel(cells: testData)
     
     var backgroundColor: Color {
         colorScheme == .light ? Color.orange : Color.brown
@@ -19,7 +19,7 @@ struct CoolView: View {
             
             VStack(spacing: 0) {
                 AccessoryView(text: $text, addCell: addCell)
-                CellContainer(cells: store.cells)
+                CoolViewCellContainer(viewModel: viewModel)
             }
             .accentColor(Color.orange)
             .edgesIgnoringSafeArea(.all)
@@ -28,8 +28,8 @@ struct CoolView: View {
     
     func addCell() {
         print("In \(#function), text is \(text)")
-        let newModel = Cell(text: text, color: .blue, offset: .zero)
-        store.cells.append(newModel)
+        let newModel = CellModel(text: text, color: .blue, offset: .zero)
+        viewModel.cells.append(newModel)
     }
 }
 

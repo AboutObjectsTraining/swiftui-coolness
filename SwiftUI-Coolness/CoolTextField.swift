@@ -6,6 +6,7 @@ import SwiftUI
 struct CoolTextField: View {
     @Binding var text: String
     @FocusState private var isFocused: Bool
+    
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     private var isClearButtonVisible: Bool {

@@ -58,7 +58,7 @@ private let defaultColorName = "black"
 private let defaultOffset = CGSize.zero
 private let defaultOffsetDict = ["Width": 0.0, "Height": 0.0]
 
-struct Cell: Identifiable, Decodable {
+struct CellModel: Identifiable, Decodable {
     var id = UUID()
     var text: String
     var color: Color
@@ -91,7 +91,7 @@ struct Cell: Identifiable, Decodable {
     }
 }
 
-extension Cell: Encodable {
+extension CellModel: Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)

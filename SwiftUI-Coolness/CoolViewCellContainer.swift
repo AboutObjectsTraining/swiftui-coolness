@@ -3,9 +3,9 @@
 
 import SwiftUI
 
-struct CellContainer: View {
+struct CoolViewCellContainer: View {
+    @ObservedObject var viewModel: CoolViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    let cells: [Cell]
     
     var background: some View {
         Rectangle()
@@ -16,38 +16,38 @@ struct CellContainer: View {
     var body: some View {
         ZStack {
             background
-            Cells(cells: cells)
+            CoolViewCells(cells: viewModel.cells)
         }
         .clipped()
     }
 }
 
-struct Cells: View {
-    let cells: [Cell]
+struct CoolViewCells: View {
+    let cells: [CellModel]
     let topPadding: CGFloat = 40
     
     var body: some View {
         GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height - topPadding
+            
             VStack(alignment: .leading, spacing: 30) {
-                ForEach(self.cells) {
-                    CoolViewCell(cell: $0)
+                ForEach(cells) {
+                    CoolViewCell(cellModel: $0)
                 }
             }
-            .frame(width: geometry.size.width,
-                   height: geometry.size.height - topPadding,
-                   alignment: .topLeading)
+            .frame(width: width, height: height, alignment: .topLeading)
             .padding(.top, topPadding)
         }
     }
 }
 
 #if DEBUG
-struct CellContainer_Previews: PreviewProvider {
+struct CoolViewCellContainer_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) {
-            CoolView()
-                .environment(\.colorScheme, $0)
-        }
+        CoolView()
+        CoolView()
+            .preferredColorScheme(.dark)
     }
 }
 #endif

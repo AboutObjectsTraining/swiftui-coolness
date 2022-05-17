@@ -13,8 +13,8 @@ let encoder: JSONEncoder = {
 let decoder = JSONDecoder()
 
 let cells = [
-    Cell(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: CGSize(width: 20, height: 0)),
-    Cell(text: "Cool View Cells Rock! 🎉🍾", color: Color.orange, offset: CGSize(width: 60, height: 0)),
+    CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: CGSize(width: 20, height: 0)),
+    CellModel(text: "Cool View Cells Rock! 🎉🍾", color: Color.orange, offset: CGSize(width: 60, height: 0)),
 ]
 
 
@@ -29,7 +29,7 @@ class CodableTests: XCTestCase {
     
     func testDecodeCells() throws {
         let data = try encoder.encode(cells)
-        let decodedCells = try decoder.decode([Cell].self, from: data)
+        let decodedCells = try decoder.decode([CellModel].self, from: data)
         print(decodedCells)
         XCTAssertEqual(decodedCells.count, cells.count)
     }

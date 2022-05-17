@@ -10,9 +10,9 @@ struct AccessoryView: View {
     }
     
     @Binding var text: String
-    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
-    
     var addCell: () -> Void
+    
+    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     
     var height: CGFloat {
         return verticalSizeClass == .regular ? Height.regular : Height.compact
@@ -27,6 +27,7 @@ struct AccessoryView: View {
             
             HStack() {
                 CoolTextField(text: $text)
+                
                 Button(action: addCell) {
                     Image(systemName: "plus.circle.fill")
                         .imageScale(.large)
@@ -37,6 +38,7 @@ struct AccessoryView: View {
                 }
             }
             .frame(height: height - 40, alignment: .bottom)
+            .frame(alignment: .bottom)
             .padding()
         }
     }
@@ -59,6 +61,8 @@ struct AccessoryView_Previews: PreviewProvider {
         }
         .frame(height: 80)
         .previewLayout(.sizeThatFits)
+        
+        CoolView()
     }
 }
 #endif
