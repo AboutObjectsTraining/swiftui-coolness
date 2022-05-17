@@ -9,8 +9,8 @@ struct AccessoryView: View {
         static let regular: CGFloat = 110
     }
     
+    @EnvironmentObject var coolViewModel: CoolViewModel
     @Binding var text: String
-    var addCell: () -> Void
     
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     
@@ -42,6 +42,10 @@ struct AccessoryView: View {
             .padding()
         }
     }
+    
+    private func addCell() {
+        coolViewModel.addCell(text: text, color: .blue)
+    }
 }
 
 #if DEBUG
@@ -50,12 +54,12 @@ struct AccessoryView_Previews: PreviewProvider {
         Group {
             ZStack {
                 Color.orange
-                AccessoryView(text: .constant("Hello, Hello, Hello! I am your beloved Count Olaf."), addCell: {} )
+                AccessoryView(text: .constant("Hello, Hello, Hello! I am your beloved Count Olaf."))
             }
             
             ZStack {
                 Color.brown
-                AccessoryView(text: .constant("Hello, Hello, Hello! I am your beloved Count Olaf."), addCell: {} )
+                AccessoryView(text: .constant("Hello, Hello, Hello! I am your beloved Count Olaf."))
             }
             .preferredColorScheme(.dark)
         }

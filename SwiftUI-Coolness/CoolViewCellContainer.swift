@@ -4,7 +4,6 @@
 import SwiftUI
 
 struct CoolViewCellContainer: View {
-    @ObservedObject var viewModel: CoolViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     var background: some View {
@@ -16,14 +15,14 @@ struct CoolViewCellContainer: View {
     var body: some View {
         ZStack {
             background
-            CoolViewCells(cells: viewModel.cells)
+            CoolViewCells()
         }
         .clipped()
     }
 }
 
 struct CoolViewCells: View {
-    let cells: [CellModel]
+    @EnvironmentObject var viewModel: CoolViewModel
     let topPadding: CGFloat = 40
     
     var body: some View {
@@ -32,7 +31,7 @@ struct CoolViewCells: View {
             let height = geometry.size.height - topPadding
             
             ZStack(alignment: .leading) {
-                ForEach(cells) {
+                ForEach(viewModel.cells) {
                     CoolViewCell(cellModel: $0)
                 }
             }

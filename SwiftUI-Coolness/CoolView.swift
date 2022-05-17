@@ -18,8 +18,8 @@ struct CoolView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
-                AccessoryView(text: $text, addCell: addCell)
-                CoolViewCellContainer(viewModel: viewModel)
+                AccessoryView(text: $text)
+                CoolViewCellContainer()
             }
             .accentColor(Color.orange)
             .edgesIgnoringSafeArea(.all)
@@ -28,14 +28,14 @@ struct CoolView: View {
     
     func addCell() {
         print("In \(#function), text is \(text)")
-        let newModel = CellModel(text: text, color: .blue, offset: .zero)
-        viewModel.cells.append(newModel)
+        viewModel.addCell(text: text, color: .blue)
     }
 }
 
 // MARK: Previews
 #if DEBUG
 extension CoolView {
+    
     static var testView: CoolView {
         let coolView = CoolView()
             .environmentObject(CoolViewModel.testModel)

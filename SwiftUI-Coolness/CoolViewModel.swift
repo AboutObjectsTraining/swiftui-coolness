@@ -5,7 +5,7 @@ import SwiftUI
 import Combine
 
 final class CoolViewModel: ObservableObject {
-    @Published var cells: [CellModel]
+    @Published private(set) var cells: [CellModel]
     
     init(cells: [CellModel] = []) {
         self.cells = cells
@@ -14,6 +14,12 @@ final class CoolViewModel: ObservableObject {
 
 // MARK: - Intents
 extension CoolViewModel {
+    
+    func addCell(text: String, color: Color, offset: CGSize = .zero) {
+        let cellModel = CellModel(text: text, color: color, offset: offset)
+        cells.append(cellModel)
+    }
+    
     func bringCellToFront(_ cell: CellModel) {
         guard let index = cells.firstIndex(where: { $0.id == cell.id }) else { return }
         cells.remove(at: index)
