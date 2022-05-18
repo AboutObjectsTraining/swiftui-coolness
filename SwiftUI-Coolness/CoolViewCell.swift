@@ -152,8 +152,9 @@ struct CoolViewCell_Previews: PreviewProvider {
                 .environment(\.sizeCategory, .extraExtraExtraLarge)
             CoolViewCell(cellModel: CellModel(text: "Hello World! 🌍🌎🌏", color: Color.purple, offset: .zero))
                 .preferredColorScheme(.dark)
-            CoolView.testView
+            CoolView()
         }
+        .environmentObject(CoolViewModel.testModel)
         .previewLayout(.sizeThatFits)
     }
 }

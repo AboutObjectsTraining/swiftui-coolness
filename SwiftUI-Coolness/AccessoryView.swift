@@ -17,7 +17,18 @@ struct AccessoryView: View {
     var height: CGFloat {
         return verticalSizeClass == .regular ? Height.regular : Height.compact
     }
-        
+    
+    private var addButton: some View {
+        Button(action: addCell) {
+            Image(systemName: "plus.circle.fill")
+                .imageScale(.large)
+                .font(.system(size: 22))
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .foregroundColor(.orange)
+        }
+    }
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -27,15 +38,7 @@ struct AccessoryView: View {
             
             HStack() {
                 CoolTextField(text: $text)
-                
-                Button(action: addCell) {
-                    Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
-                        .font(.system(size: 22))
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .foregroundColor(.orange)
-                }
+                addButton
             }
             .frame(height: height - 40, alignment: .bottom)
             .frame(alignment: .bottom)
@@ -65,8 +68,10 @@ struct AccessoryView_Previews: PreviewProvider {
         }
         .frame(height: 80)
         .previewLayout(.sizeThatFits)
-        
-        CoolView.testView
+        .environmentObject(CoolViewModel.testModel)
+
+        CoolView()
+            .environmentObject(CoolViewModel.testModel)
     }
 }
 #endif

@@ -15,15 +15,14 @@ struct CoolView: View {
     var body: some View {
         ZStack {
             backgroundColor
-                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
                 AccessoryView(text: $text)
                 CoolViewCellContainer()
             }
             .accentColor(Color.orange)
-            .edgesIgnoringSafeArea(.all)
         }
+        .edgesIgnoringSafeArea(.all)
     }
     
     func addCell() {
@@ -34,22 +33,19 @@ struct CoolView: View {
 
 // MARK: Previews
 #if DEBUG
-extension CoolView {
-    
-    static var testView: CoolView {
-        let coolView = CoolView()
-            .environmentObject(CoolViewModel.testModel)
-        
-        return coolView as! CoolView
-    }
-}
-
 struct CoolViewPreviews: PreviewProvider {
     static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) {
-            CoolView.testView
-                .environment(\.colorScheme, $0)
+        Group {
+            CoolView()
+            CoolView()
+                .preferredColorScheme(.dark)
         }
+        .environmentObject(CoolViewModel.testModel)
+        
+//        ForEach(ColorScheme.allCases, id: \.self) {
+//            CoolView.testView
+//                .environment(\.colorScheme, $0)
+//        }
     }
 }
 #endif
